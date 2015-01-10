@@ -2,21 +2,15 @@ require 'json'
 require 'rspec'
 require_relative './neato_class'
 require_relative './helper'
+require_relative './string_to_hash_maker'
 
 describe 'My behaviour' do
 
   it 'convert string to hash' do
-    string = "{key:[[value_1, value_2],[value_3, value4]], 5:10:00AM]}"
-    # remove trailing bracket
-    reada = string.gsub /(\d\d\:\d\d\w\w)\]/, '\1'
-    # wrap all non numbers and not dates with strings
-    read = reada.gsub /(\d\d\:\d\d\w\w|[a-z_]+\d*)/, '"\1"'
-    # converting colon to ruby hash symbol for easy ingestion
-    read2 = read.gsub /((?<=\D):)|(:(?=\D))/, '=>'
+    str = "{key:[[value_1, value_2],[value_3, value4]], 5:10:00AM]}"
+    output = StringToHashMaker.convert str
     expected_hash = {"key" => [["value_1", "value_2"], ["value_3", "value4"]], 5 => "10:00AM"}
-    # evaluate the sanitized string as ruby code
-    out_put = eval read2
-    expect(out_put).to eq(expected_hash)
+    expect(output).to eq(expected_hash)
   end
 
   it 'should do number 2' do
