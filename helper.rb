@@ -10,7 +10,7 @@ module Helper
     File.open(clean_str, "w") do |out_line|
       File.open(file_str, "r") do |in_line|
         line = in_line.read
-        clean_line = line.gsub('"', '')
+        clean_line = line.gsub('"', '*')
         out_line.write(clean_line)
       end
     end
