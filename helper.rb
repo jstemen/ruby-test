@@ -10,18 +10,18 @@ module Helper
     File.open(clean_str, "w") do |out_line|
       File.open(file_str, "r") do |in_line|
         line = in_line.read
-        clean_line = line.gsub("\t\t\t", "\t").gsub("\t\t", "\t").gsub(/\r\n?/, "\n").gsub(/\t$/, "").gsub('"', '')
+        clean_line = line.gsub('"', '')
         out_line.write(clean_line)
       end
     end
     tracker_hash = {}
-    total_chunks = SmarterCSV.process(clean_str, {:chunk_size => 2, :col_sep => "\t", :row_sep => "\n"}) do |chunk|
+    total_chunks = SmarterCSV.process(clean_str, {:remove_empty_values =>false, :strings_as_keys =>true, :chunk_size => 20, :col_sep => "\t", :row_sep => "\n"}) do |chunk|
       chunk.each do |h| # you can post-process the data from each row to your heart's content, and also create virtual attributes:
         h.each { |key, value|
-          tracker_hash[key.to_s] ||= [-1, nil]
+          tracker_hash[key] ||= [0, ""]
           in_length = value.to_s.chars.length
-          if in_length > tracker_hash[key.to_s].first
-            tracker_hash[key.to_s] = [in_length, h[:factual_id]]
+          if in_length > tracker_hash[key].first
+            tracker_hash[key] = [in_length, h["factual_id"]]
           end
         }
 
