@@ -14,14 +14,13 @@ module Helper
                  :row_sep => "\n"}
     total_chunks = SmarterCSV.process(file_str, opts_hash) do |chunk|
       chunk.each do |row|
-        row.each { |key, value|
+        row.each do |key, value|
           tracker_hash[key] ||= [0, ""]
           in_length = value.to_s.chars.length
           if in_length > tracker_hash[key].first
             tracker_hash[key] = [in_length, row["factual_id"]]
           end
-        }
-
+        end
       end
     end
     tracker_hash

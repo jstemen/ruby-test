@@ -5,11 +5,14 @@ require_relative './helper'
 
 describe 'My behaviour' do
 
-  xit 'convert string to hash' do
+  it 'convert string to hash' do
     string = "{key:[[value_1, value_2],[value_3, value4]], 5:10:00AM]}"
+    reada = string.gsub /(\d\d\:\d\d\w\w)\]/, '\1'
+    read = reada.gsub /(\d\d\:\d\d\w\w|[a-z_]+\d*)/, '"\1"'
+    read2 = read.gsub /((?<=\D):)|(:(?=\D))/, '=>'
     expected_hash = {"key" => [["value_1", "value_2"], ["value_3", "value4"]], 5 => "10:00AM"}
-    out_put = eval string
-    expect(out_put).eq expected_hash
+    out_put = eval read2
+    expect(out_put).to eq(expected_hash)
   end
 
   it 'should do number 2' do
