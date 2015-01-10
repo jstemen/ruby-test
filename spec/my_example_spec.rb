@@ -1,8 +1,8 @@
 require 'json'
 require 'rspec'
-require_relative './neato_class'
-require_relative './helper'
-require_relative './string_to_hash_maker'
+require_relative '../neato_class'
+require_relative '../helper'
+require_relative '../string_to_hash_maker'
 
 describe 'My behaviour' do
 
