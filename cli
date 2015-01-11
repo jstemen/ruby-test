@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+require 'thor'
+require 'table_print'
+require_relative './data_processor'
+class App < Thor # [1]
+
+  desc "process_input_file [INPUT-FILE]", "find the records that have the longest fields"
+
+  def process_input_file(input_file)
+    out = DataProcessor.go input_file
+    formated = out.collect { |key, value|
+      {column_name: key, char_length: value[0], fractual_id: value[1]}
+    }
+    tp formated
+  end
+end
+
+App.start(ARGV)

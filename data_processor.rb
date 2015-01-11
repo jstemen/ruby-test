@@ -1,8 +1,7 @@
 require 'smarter_csv'
 module DataProcessor
-  def self.go
+  def self.go(file_str)
 
-    file_str = './factual.input.txt'
 
     tracker_hash = {}
     opts_hash = {:force_simple_split => true,

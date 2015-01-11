@@ -55,7 +55,7 @@ describe 'DataProcessor' do
                 "status" => [1, "b716c681-ad67-4c9c-aab4-7f5fb39e3e11"],
                 "chain_name" => [0, ""],
                 "chain_id" => [0, ""]}
-    out = DataProcessor.go
+    out = DataProcessor.go './factual.input.txt'
     expected.each { |key, value|
       var = out[key]
       expect(var).to eq(value), "key: #{key} : expected #{value} but got #{var}"

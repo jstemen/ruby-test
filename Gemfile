@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
-
+gem 'thor'
 gem 'json'
 gem 'smarter_csv'
 gem 'rspec'
+gem 'table_print'
 ruby '2.1.3'
