@@ -1,4 +1,4 @@
-
+#add in standard rspec stuff
 begin
   require 'rspec/core/rake_task'
 
