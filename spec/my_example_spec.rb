@@ -1,19 +1,24 @@
 require 'json'
 require 'rspec'
 require_relative '../neato_class'
-require_relative '../helper'
+require_relative '../data_processor'
 require_relative '../string_to_hash_maker'
 
-describe 'My behaviour' do
 
-  it 'convert string to hash' do
+describe 'StringToHashMaker' do
+
+  it 'should convert string to hash' do
     str = "{key:[[value_1, value_2],[value_3, value4]], 5:10:00AM]}"
     output = StringToHashMaker.convert str
     expected_hash = {"key" => [["value_1", "value_2"], ["value_3", "value4"]], 5 => "10:00AM"}
     expect(output).to eq(expected_hash)
   end
+end
 
-  it 'should do number 2' do
+
+describe 'NeatoClass' do
+
+  it 'should redirect method calls to hash' do
     h = {"this" => [1, 2, 3, 4, 5, 6], "that" => ['here', 'there', 'everywhere'], "other" => 'here'}
     c = NeatoClass.new(h)
     expect(c.this).to eq([1, 2, 3, 4, 5, 6])
@@ -21,7 +26,12 @@ describe 'My behaviour' do
     expect(c.other).to eq('here')
   end
 
+end
+
+describe 'DataProcessor' do
+
   it 'should find the answer to 3' do
+
     expected = {"factual_id" => [36, "b716c681-ad67-4c9c-aab4-7f5fb39e3e11"],
                 "name" => [72, "900ba574-2cc5-4d22-bf2e-92fb14412abf"],
                 "address" => [25, "9f56d3d6-f1e9-463c-b6b5-020bf2cd9492"],
@@ -45,8 +55,8 @@ describe 'My behaviour' do
                 "status" => [1, "b716c681-ad67-4c9c-aab4-7f5fb39e3e11"],
                 "chain_name" => [0, ""],
                 "chain_id" => [0, ""]}
-    out = Helper.go
-    expected.each{|key,value|
+    out = DataProcessor.go
+    expected.each { |key, value|
       var = out[key]
       expect(var).to eq(value), "key: #{key} : expected #{value} but got #{var}"
     }

@@ -1,5 +1,5 @@
 require 'smarter_csv'
-module Helper
+module DataProcessor
   def self.go
 
     file_str = './factual.input.txt'
