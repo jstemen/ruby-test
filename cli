@@ -11,7 +11,8 @@ class App < Thor # [1]
     formated = out.collect { |key, value|
       {column_name: key, char_length: value[0], fractual_id: value[1]}
     }
-    tp formated
+    tp formated, :column_name, :char_length, {fractual_id: {width: 120}}
+
   end
 end
 
