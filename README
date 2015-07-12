@@ -1,4 +1,5 @@
-This code is the solution to a programming challenge defined in the "instructions.txt" file in this repo.  Please read it to learn what this code is attempting to do.
+This code is the solution to a programming challenge defined in the "instructions.txt" file in this repo.  
+Please read it to learn what this code is attempting to do.
 
 1. Run "bundle"
 2. Run "rake spec"
